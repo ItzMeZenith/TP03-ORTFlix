@@ -1,0 +1,14 @@
+C:\Users\48311441\Desktop\TP03-ORTFlix\bin\Debug\net8.0\TP03-ORTFlix.exe
+C:\Users\48311441\Desktop\TP03-ORTFlix\bin\Debug\net8.0\TP03-ORTFlix.deps.json
+C:\Users\48311441\Desktop\TP03-ORTFlix\bin\Debug\net8.0\TP03-ORTFlix.runtimeconfig.json
+C:\Users\48311441\Desktop\TP03-ORTFlix\bin\Debug\net8.0\TP03-ORTFlix.dll
+C:\Users\48311441\Desktop\TP03-ORTFlix\bin\Debug\net8.0\TP03-ORTFlix.pdb
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.AssemblyInfoInputs.cache
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.AssemblyInfo.cs
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.csproj.CoreCompileInputs.cache
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.dll
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\refint\TP03-ORTFlix.dll
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.pdb
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.genruntimeconfig.cache
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\ref\TP03-ORTFlix.dll
