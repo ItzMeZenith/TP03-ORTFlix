@@ -12,3 +12,4 @@ C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\refint\TP03-ORTFlix.dll
 C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.pdb
 C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.genruntimeconfig.cache
 C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\ref\TP03-ORTFlix.dll
+C:\Users\48311441\Desktop\TP03-ORTFlix\obj\Debug\net8.0\TP03-ORTFlix.sourcelink.json

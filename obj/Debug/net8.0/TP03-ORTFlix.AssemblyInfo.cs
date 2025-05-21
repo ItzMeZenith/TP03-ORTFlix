@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TP03-ORTFlix")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49f6f031061bebaad04564a25be00c35209ace5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TP03-ORTFlix")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TP03-ORTFlix")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
