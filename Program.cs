@@ -65,120 +65,192 @@ namespace TP03_ORTFlix
             List<Cliente> listaNegra = new List<Cliente>();
             List<Pelicula> peliculas = new List<Pelicula>();
 
-            public void AgregarPelicula(string nombre, bool esPremium)
+            public void VerPelicula()
             {
-                peliculas.Add(new Pelicula(nombre, esPremium));
-            }
+                Console.Write("Ingrese el DNI del cliente: ");
+                int dni = int.Parse(Console.ReadLine());
 
-            public string VerPelicula(int dni, string nombrePelicula)
-            {
+                Console.Write("Ingrese el nombre de la película: ");
+                string nombrePelicula = Console.ReadLine();
+
                 Cliente cliente = clientes.FirstOrDefault(c => c.DNI == dni);
                 if (cliente == null)
-                    return CLIENTE_INEXISTENTE;
+                {
+                    Console.WriteLine(CLIENTE_INEXISTENTE);
+                    return;
+                }
 
                 Pelicula pelicula = peliculas.FirstOrDefault(p => p.Nombre == nombrePelicula);
                 if (pelicula == null)
-                    return CONTENIDO_INEXISTENTE;
+                {
+                    Console.WriteLine(CONTENIDO_INEXISTENTE);
+                    return;
+                }
 
                 if (cliente.EsDeudor())
-                    return CLIENTE_DEUDOR;
+                {
+                    Console.WriteLine(CLIENTE_DEUDOR);
+                    return;
+                }
 
                 if (pelicula.EsPremium && cliente.Servicio != SERVICIO_PREMIUM)
-                    return CONTENIDO_NO_DISPONIBLE;
+                {
+                    Console.WriteLine(CONTENIDO_NO_DISPONIBLE);
+                    return;
+                }
 
                 cliente.VerPelicula(nombrePelicula);
-                return OK;
+                Console.WriteLine(OK);
             }
 
-            public void DarDeBaja(int dni)
+            public void DarDeBaja()
             {
+                Console.Write("Ingrese el DNI del cliente a dar de baja: ");
+                int dni = int.Parse(Console.ReadLine());
+
                 Cliente cliente = clientes.FirstOrDefault(c => c.DNI == dni);
                 if (cliente != null)
                 {
                     clientes.Remove(cliente);
                     if (cliente.EsDeudor())
+                    {
                         listaNegra.Add(cliente);
+                        Console.WriteLine("Cliente dado de baja y agregado a la lista negra.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cliente dado de baja.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Cliente no encontrado.");
                 }
             }
 
-            public string DarDeAlta(int dni, string nombre, string servicio)
+            public void DarDeAlta()
             {
+                Console.Write("Ingrese DNI: ");
+                int dni = int.Parse(Console.ReadLine());
+
                 if (clientes.Any(c => c.DNI == dni))
-                    return CLIENTE_EXISTENTE;
+                {
+                    Console.WriteLine(CLIENTE_EXISTENTE);
+                    return;
+                }
 
                 Cliente exDeudor = listaNegra.FirstOrDefault(c => c.DNI == dni);
                 if (exDeudor != null && exDeudor.EsDeudor())
-                    return CLIENTE_DEUDOR_PREVIO;
+                {
+                    Console.WriteLine(CLIENTE_DEUDOR_PREVIO);
+                    return;
+                }
+
+                Console.Write("Ingrese nombre: ");
+                string nombre = Console.ReadLine();
+
+                Console.Write("Ingrese tipo de servicio (Standard/Premium): ");
+                string servicio = Console.ReadLine();
 
                 Cliente nuevoCliente = new Cliente(dni, nombre, servicio);
                 clientes.Add(nuevoCliente);
-                return ALTA_OK;
+                Console.WriteLine(ALTA_OK);
             }
 
-            public void DepurarListaNegra(decimal importeTope)
+            public void DepurarListaNegra()
             {
-                listaNegra.RemoveAll(c => c.Saldo <= importeTope);
+                Console.Write("Ingrese el importe tope para limpiar lista negra: ");
+                decimal tope = decimal.Parse(Console.ReadLine());
+
+                int eliminados = listaNegra.RemoveAll(c => c.Saldo <= tope);
+                Console.WriteLine($"Se eliminaron {eliminados} clientes de la lista negra.");
             }
 
-            // Métodos auxiliares para ver el estado
             public void MostrarClientes()
             {
-                Console.WriteLine("Clientes activos:");
+                Console.WriteLine("\nClientes activos:");
                 foreach (var c in clientes)
                 {
-                    Console.WriteLine($"DNI: {c.DNI}, Nombre: {c.Nombre}, Servicio: {c.Servicio}, Saldo: {c.Saldo}, Vió: {string.Join(", ", c.HistorialPeliculas)}");
+                    Console.WriteLine($"DNI: {c.DNI}, Nombre: {c.Nombre}, Servicio: {c.Servicio}, Saldo: {c.Saldo}, Historial: {string.Join(", ", c.HistorialPeliculas)}");
                 }
+                Console.WriteLine();
             }
 
             public void MostrarListaNegra()
             {
-                Console.WriteLine("Lista Negra:");
+                Console.WriteLine("\nLista Negra:");
                 foreach (var c in listaNegra)
                 {
                     Console.WriteLine($"DNI: {c.DNI}, Nombre: {c.Nombre}, Deuda: {c.Saldo}");
+                }
+                Console.WriteLine();
+            }
+
+            public void PrecargarPeliculas()
+            {
+                peliculas.Add(new Pelicula("Pelicula", true));
+                peliculas.Add(new Pelicula("Pelicula: La secuela", false));
+                peliculas.Add(new Pelicula("Pelicula: La leyenda del cine", true));
+                peliculas.Add(new Pelicula("Pelicula: Origenes", false));
+            }
+
+            public void Menu()
+            {
+                while (true)
+                {
+                    Console.WriteLine("========== ORTFlix ===========");
+                    Console.WriteLine("| 1. Dar de alta cliente     |");
+                    Console.WriteLine("| 2. Dar de baja cliente     |");
+                    Console.WriteLine("| 3. Ver película            |");
+                    Console.WriteLine("| 4. Depurar lista negra     |");
+                    Console.WriteLine("| 5. Mostrar clientes        |");
+                    Console.WriteLine("| 6. Mostrar lista negra     |");
+                    Console.WriteLine("| 0. Salir                   |");
+                    Console.WriteLine("==============================");
+                    Console.WriteLine("Seleccione una opción");
+
+                    string opcion = Console.ReadLine();
+
+                    Console.WriteLine();
+
+                    switch (opcion)
+                    {
+                        case "1":
+                            DarDeAlta();
+                            break;
+                        case "2":
+                            DarDeBaja();
+                            break;
+                        case "3":
+                            VerPelicula();
+                            break;
+                        case "4":
+                            DepurarListaNegra();
+                            break;
+                        case "5":
+                            MostrarClientes();
+                            break;
+                        case "6":
+                            MostrarListaNegra();
+                            break;
+                        case "0":
+                            Console.WriteLine("Saliendo...");
+                            return;
+                        default:
+                            Console.WriteLine("Opción inválida.");
+                            break;
+                    }
+
+                    Console.WriteLine();
                 }
             }
 
             public static void Main()
             {
                 ORTFlix sistema = new ORTFlix();
-
-                // Películas
-                sistema.AgregarPelicula("Avengers", false);
-                sistema.AgregarPelicula("Dune 2", true);
-
-                // Alta de clientes
-                Console.WriteLine(sistema.DarDeAlta(111, "Juan", SERVICIO_STANDARD)); // ALTA_OK
-                Console.WriteLine(sistema.DarDeAlta(222, "Ana", SERVICIO_PREMIUM));   // ALTA_OK
-
-                // Simular deuda
-                sistema.clientes[0].Saldo = 100;
-
-                // Pruebas ver película
-                Console.WriteLine(sistema.VerPelicula(111, "Avengers"));  // CLIENTE_DEUDOR
-                sistema.clientes[0].Saldo = 0;
-                Console.WriteLine(sistema.VerPelicula(111, "Dune 2"));    // CONTENIDO_NO_DISPONIBLE
-                Console.WriteLine(sistema.VerPelicula(222, "Dune 2"));    // OK
-
-                // Dar de baja y agregar a lista negra
-                sistema.clientes[0].Saldo = 50;
-                sistema.DarDeBaja(111);
-
-                // Intento de alta con deuda previa
-                Console.WriteLine(sistema.DarDeAlta(111, "Juan", SERVICIO_STANDARD)); // CLIENTE_DEUDOR
-
-                // Depurar lista negra
-                sistema.DepurarListaNegra(50);
-
-                // Alta luego de depuración
-                Console.WriteLine(sistema.DarDeAlta(111, "Juan", SERVICIO_PREMIUM)); // ALTA_OK
-
-                // Mostrar resultados
-                Console.WriteLine();
-                sistema.MostrarClientes();
-                Console.WriteLine();
-                sistema.MostrarListaNegra();
+                sistema.PrecargarPeliculas(); // Carga inicial de películas
+                sistema.Menu(); // Muestra el menú interactivo
             }
         }
-        }
+    }
 }
